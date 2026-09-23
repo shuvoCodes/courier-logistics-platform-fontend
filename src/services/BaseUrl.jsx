@@ -1,0 +1,1 @@
+export const baseUrl = "https://courier-logistics-platform-7en8.onrender.com"
