@@ -31,17 +31,17 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />
-      }
+      },
+      {
+        path: '/registration',
+        element: <Registration />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
 
     ],
-  },
-  {
-    path: '/registration',
-    element: <Registration />
-  },
-  {
-    path: '/login',
-    element: <Login />
   },
   {
     path: '/admin',
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'users/:users_id/update',
-        element:  <PrivateRoute><UpdateUser /></PrivateRoute>
+        element: <PrivateRoute><UpdateUser /></PrivateRoute>
       },
       {
         path: '/admin/createparcel',
@@ -65,20 +65,20 @@ export const router = createBrowserRouter([
       },
       {
         path: 'allparcels/parcels/update/:parcelId',
-        element:<PrivateRoute> <UpdateParcel /></PrivateRoute>
+        element: <PrivateRoute> <UpdateParcel /></PrivateRoute>
       },
       {
         path: 'allparcels/tracking/:parcelId',
-        element:<PrivateRoute> <Tracking/></PrivateRoute>
+        element: <PrivateRoute> <Tracking /></PrivateRoute>
       }
       ,
       {
         path: '/admin/tracking',
-        element:<PrivateRoute> <TrackingById/></PrivateRoute>
+        element: <PrivateRoute> <TrackingById /></PrivateRoute>
       },
       {
         path: '/admin/profile',
-        element: <PrivateRoute><Profile/></PrivateRoute>
+        element: <PrivateRoute><Profile /></PrivateRoute>
       }
     ]
   },
@@ -96,20 +96,20 @@ export const router = createBrowserRouter([
       },
       {
         path: 'parcels/update/:parcelId',
-        element:<PrivateRoute> <UpdateParcelUsers /></PrivateRoute>
+        element: <PrivateRoute> <UpdateParcelUsers /></PrivateRoute>
       },
       {
         path: 'allparcels/tracking/:parcelId',
-        element:<PrivateRoute> <TrackingUsers/></PrivateRoute>
+        element: <PrivateRoute> <TrackingUsers /></PrivateRoute>
       }
       ,
       {
         path: '/user/tracking',
-        element:<PrivateRoute> <TrackingByIdUsers/></PrivateRoute>
+        element: <PrivateRoute> <TrackingByIdUsers /></PrivateRoute>
       },
       {
         path: '/user/profile',
-        element: <PrivateRoute><ProfileUsers/></PrivateRoute>
+        element: <PrivateRoute><ProfileUsers /></PrivateRoute>
       }
     ]
   },

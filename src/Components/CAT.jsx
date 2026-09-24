@@ -1,4 +1,10 @@
-const CTA = ({ onRegister, onLogin, isMember = false }) => {
+import { useContext } from "react";
+import { Link } from "react-router";
+import { AuthContext } from "../Content/AuthProvider";
+
+const CTA = () => {
+
+  const {authUser}  = useContext(AuthContext);
   return <section className="bg-yellow-400 py-16">
     <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 px-4 md:flex-row">
 
@@ -6,15 +12,15 @@ const CTA = ({ onRegister, onLogin, isMember = false }) => {
         Your first parcel is a few minutes away.</h2>
 
       <div className="flex flex-wrap justify-center gap-4">
-        {isMember ? <a href="/dashboard" className="rounded-lg bg-gray-900 px-6 py-3 font-semibold text-white">
+        {authUser ? <a href="/dashboard" className="rounded-lg bg-gray-900 px-6 py-3 font-semibold text-white">
           Open dashboard</a>
           : <>
 
-            <button onClick={onRegister} className="rounded-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.50)] bg-gray-900 px-6 py-3 font-semibold text-white">
-              Create an account</button>
+            <Link to={'/registration'} className="rounded-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.50)] bg-gray-900 px-6 py-3 font-semibold text-white">
+              Create an account</Link>
 
-            <button onClick={onLogin} className="rounded-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.50)] px-6 py-3 font-semibold">
-              Log in</button>
+            <Link to={'/login'} className="rounded-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.50)] px-6 py-3 font-semibold">
+              Log in</Link>
 
           </>
         }</div>

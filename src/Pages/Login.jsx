@@ -105,7 +105,6 @@ const Login = () => {
 
                 toast.success("Login successful!");
 
-                // Navigate করার আগ পর্যন্ত loading থাকবে
                 navigate("/");
             } else {
                 toast.error("Username or password is incorrect!");

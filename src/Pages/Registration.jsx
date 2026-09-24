@@ -3,10 +3,11 @@ import { baseUrl } from "../services/BaseUrl";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
-
-
 const Registration = () => {
     const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         email: "",
         username: "",
@@ -14,9 +15,8 @@ const Registration = () => {
         lastname: "",
         phone: "",
         password: "",
-        role: "customer",
+        role: "user",
     });
-    // const [response, setRespnse] = useState('');
 
     const handleChange = (e) => {
         setFormData({
@@ -25,26 +25,33 @@ const Registration = () => {
         });
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const resUser = await fetch(`${baseUrl}/Auth/register`,{
-                 method:"POST",
-            headers:{
-                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData) 
-        }).catch((err) => console.log(err))
-        
-        const userData = await resUser.json()
-        // setRespnse(userData);
-        // console.log(userData);
-        toast.success(userData.Message);
+        setLoading(true);
 
-        if(userData.Message == "User Registered Sucessfully."){
-            navigate('/login');
+        try {
+            const resUser = await fetch(`${baseUrl}/Auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const userData = await resUser.json();
+
+            toast.success(userData.Message);
+
+            if (userData.Message === "User Registered Sucessfully.") {
+                navigate("/login");
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error("Something went wrong. Please try again.");
+        } finally {
+            setLoading(false);
         }
-        else return;
     };
 
     return (
@@ -170,31 +177,16 @@ const Registration = () => {
                             />
                         </div>
 
-                        {/* Role */}
-                        <div className="sm:col-span-2">
-                            <label className="mb-2 block text-sm font-semibold text-gray-700">
-                                Account Role
-                            </label>
-
-                            <select
-                                name="role"
-                                value={formData.role}
-                                onChange={handleChange}
-                                className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
-                            >
-                                <option value="user">Customer</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-
                     </div>
 
                     {/* Submit Button */}
                     <button
-                        type="submit" onClick={handleSubmit}
-                        className="mt-7 w-full rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 active:scale-[0.98]"
+                        type="submit"
+                        onClick={handleSubmit}
+                        disabled={loading}
+                        className="mt-7 w-full rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
                     >
-                        Create Account
+                        {loading ? "Loading..." : "Create Account"}
                     </button>
 
                 </div>

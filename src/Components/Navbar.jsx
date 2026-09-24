@@ -17,7 +17,7 @@ const Navbar = () => {
 return <nav className="sticky top-0 z-50 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
 
-            <a href="#top" className="flex items-center gap-3">
+            <a href="/" className="flex items-center gap-3">
                 <span className="rounded-lg bg-amber-500 p-3 text-white">
                     <Truck />
                 </span>
